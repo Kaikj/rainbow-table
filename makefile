@@ -1,18 +1,28 @@
 CC=g++
-SHA=sha1/sha1.o -Isha1
+CFLAGS=-Isha1
+SHA1=sha1.o
 
-all: generate b f
+ODIR=obj
+_OBJ=$(SHA1)
+OBJ=$(patsubst %,$(ODIR)/%,$(_OBJ))
 
-generate: Generate.cpp
-	$(CC) Generate.cpp $(SHA) -o Generate
+EXE= Generate B F
 
-b: B.cpp
-	$(CC) B.cpp $(SHA) -o B
+all: $(EXE)
 
-f: F.cpp
-	$(CC) F.cpp $(SHA) -o F
+$(EXE): %: $(ODIR)/%.o $(SHA1)
+	$(CC) $< $(OBJ) -o $@
+
+$(SHA1):
+	cd sha1 && $(MAKE) $@
+	cp sha1/$@ $(ODIR)
+
+$(ODIR)/%.o: %.cpp
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 .PHONY: clean
 
 clean:
-	rm -f Generate B F
+	rm -f $(EXE)
+	rm -f $(ODIR)/*.o
+	cd sha1 && $(MAKE) clean
