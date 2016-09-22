@@ -4,3 +4,5 @@ Generate
 rainbow_table
 *.o
 plaintxt.out
+F.out
+F.err
