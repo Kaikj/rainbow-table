@@ -61,30 +61,6 @@ unordered_map <Digest, Text> HashTable;
 unordered_map <Digest, Text>::const_iterator G;
 
 
-//-----------    Hash     ----------------------------//
-int Hash (unsigned char m[3], unsigned int d[5]) {
-    SHA1 sha;
-    sha.Reset(); sha.Input(m[0]); sha.Input(m[1]); sha.Input(m[2]);
-    sha.Result(d);
-
-    TOTAL_SHA = TOTAL_SHA +1;
-    return(0);
-}
-
-//-----------    Reduce  -----------------------------//
-//   d:   input digest
-//   m:   output word
-//   i:   the index of the reduce function
-//---------------------------------------------------//
-int Reduce (unsigned int d[5], unsigned char m[3], int i) {
-    m[0] = (unsigned char)( (d[0]+i ) %256);   //8 bits
-    m[1] = (unsigned char)( (d[1]   ) %256);   //8 bits
-    m[2] = (unsigned char)( (d[2]   ) %256);   //8 bits
-
-    return(0);
-}
-
-
 //------------  Read in the Table ------------------//
 //   Store the result in M and D                    //
 int ReadT() {
@@ -158,8 +134,8 @@ int search(unsigned int target_d[5], unsigned char answer_m[3]) {
 
     for (j = 0; j < Rainbow::CHAIN_LEN; j++) {
         for (int k = 0; k < (j + 1); k++) {
-            Reduce(Colour_d[k], Colour_m[k], j);
-            Hash(Colour_m[k], Colour_d[k]);
+            Rainbow::reduce(Colour_d[k], Colour_m[k], j);
+            Rainbow::hash(Colour_m[k], Colour_d[k]);
 
             //-------- search for the digest Colour_d[k] in the data structure. 
             struct Digest d = {
@@ -178,7 +154,7 @@ int search(unsigned int target_d[5], unsigned char answer_m[3]) {
                 answer_m[2] = G->second.M[2];
                 unsigned int d[5];
                 for (int n = 0; n < Rainbow::CHAIN_LEN; n++) {
-                    Hash(answer_m, d);
+                    Rainbow::hash(answer_m, d);
                     if (d[0] == target_d[0]
                         && d[1] == target_d[1]
                         && d[2] == target_d[2]
@@ -187,7 +163,7 @@ int search(unsigned int target_d[5], unsigned char answer_m[3]) {
                         cout << "Found!" << endl;
                         return true;
                     }
-                    Reduce(d, answer_m, n);
+                    Rainbow::reduce(d, answer_m, n);
                 }
             }
         }
