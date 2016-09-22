@@ -13,30 +13,9 @@ to run
 #include <iomanip>
 #include <fstream>
 #include "sha1.h"
+#include "rainbow.hpp"
 
 using namespace std;
-
-//-----   H A S H      ------------------------------------------------
-//   getrandom (m) :     generate a random word. 
-//---------------------------------------------------------------------
-int getrandom(unsigned char m[3]) {
-    m[0] = (unsigned char) (random() % 256);
-    m[1] = (unsigned char) (random() % 256);
-    m[2] = (unsigned char) (random() % 256);
-
-    return 0;
-}
-
-//-----   H A S H      ------------------------------------------------
-//   Hash (m, d) :      compute the hash of m. The digest is stored in d.
-//---------------------------------------------------------------------
-int Hash (unsigned char m[3], unsigned int d[5]) {
-    SHA1 sha;
-
-    sha.Reset(); sha.Input(m[0]); sha.Input(m[1]); sha.Input(m[2]);
-    sha.Result(d);
-    return(0);
-}
 
 int main(int argc, char*argv[]) {
     SHA1          sha;

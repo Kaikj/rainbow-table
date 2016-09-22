@@ -3,7 +3,7 @@ CFLAGS=-Isha1
 SHA1=sha1.o
 
 ODIR=obj
-_OBJ=$(SHA1)
+_OBJ=$(SHA1) rainbow.o
 OBJ=$(patsubst %,$(ODIR)/%,$(_OBJ))
 
 EXE=Generate B F

@@ -7,6 +7,7 @@ This program builds the rainbow table for the other program F.cpp.
 #include <iomanip>
 #include <fstream>
 #include "sha1.h"
+#include "rainbow.hpp"
 
 using namespace std;
 #define HT 75000
@@ -28,22 +29,7 @@ void next_word(unsigned char m[3]) {
 }
 
 
-//-------   Hash
-int hash(unsigned char m[3], unsigned int d[5]) {
-    SHA1 sha;
-    sha.Reset(); sha.Input(m[0]); sha.Input(m[1]); sha.Input(m[2]);
-    sha.Result(d);
-    return(0);
-}
 
-//-------  Reduce
-int reduce(unsigned int d[5], unsigned char m[3],  int i ) {
-    m[0] = (unsigned char)((d[0] + i) %256);  //8 bits
-    m[1] = (unsigned char)((d[1]   ) %256);   //8 bits
-    m[2] = (unsigned char)((d[2]   ) %256);   //8 bits
-
-    return(0);
-}
 
 int buildT() {
     unsigned int  d[5];
@@ -57,20 +43,20 @@ int buildT() {
     int chain_len = pow(2, 24)/HT;
 
     for (int i = 0; i < HT; i++) {
-        next_word(m);
+        Rainbow::next_word(M[i]);
 
         // build the chain.
-        ::hash(M[i], d);
+        Rainbow::hash(M[i], d);
 
         for (int j = 0; j < chain_len - 1; j++) {
-            ::reduce(d, m, i);
+            Rainbow::reduce(d, m, i);
 
             if (j < (chain_len - 2)) {
-                ::hash(m, d);
+                Rainbow::hash(m, d);
             }
         }
 
-        ::hash(m, D[i]);
+        Rainbow::hash(m, D[i]);
 
         outfile << " " << setw(2) << setfill('0') << (unsigned int) M[i][0];
         outfile << " " << setw(2) << setfill('0') << (unsigned int) M[i][1];
