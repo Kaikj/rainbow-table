@@ -188,6 +188,7 @@ int main(int argc, char*argv[]) {
 
     SHA1        sha;
     unsigned int d[5];   // 32 x 5 = 160 bits
+    unsigned char m[3];   // 24-bit word
 
     //------------ R E A D     R A I N B O W    T A B L E  --------//
     ReadT();       cout << "READ DONE" << endl;
