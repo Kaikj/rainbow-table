@@ -14,9 +14,48 @@ unsigned long TOTAL_SHA=0;       // Count the number of hashes performed.
 unsigned char M[1024*512][3];    // array to store the word read from the table (head of chain)
 unsigned int  D[1024*512][5];    // array to store the digest read from the table  (end of chain)
 
+struct Digest {
+    unsigned int D[5];
+
+    bool operator==(const Digest &other) const {
+        return (D[0] == other.D[0]
+            && D[1] == other.D[1]
+            && D[2] == other.D[2]
+            && D[3] == other.D[3]
+            && D[4] == other.D[4]);
+    }
+};
+
+namespace std {
+    template <>
+    struct hash<Digest> {
+        std::size_t operator()(const Digest &k) const {
+            std::stringstream ss;
+            ss << k.D[0];
+            ss << k.D[1];
+            ss << k.D[2];
+            ss << k.D[3];
+            ss << k.D[4];
+
+            return std::hash<string>() (ss.str());
+    }
+  };
+}
+
+struct Text {
+    unsigned char M[3];
+
+    bool operator==(const Text &other) const {
+        return (M[0] == other.M[0]
+            && M[1] == other.M[1]
+            && M[2] == other.M[2]);
+    }
+};
+
+
 //-------   Data Structure for searching    -----------//
-unordered_map <unsigned int, unsigned int> HashTable;
-unordered_map <unsigned int, unsigned int>::const_iterator G;
+unordered_map <Digest, Text> HashTable;
+unordered_map <Digest, Text>::const_iterator G;
 
 
 //-----------    Hash     ----------------------------//
