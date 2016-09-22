@@ -9,6 +9,8 @@ This program builds the rainbow table for the other program F.cpp.
 #include "sha1.h"
 
 using namespace std;
+#define HT 75000
+#define N_CHAIN 1048676
 
 
 //  A table to store all the words and digests.
