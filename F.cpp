@@ -6,6 +6,7 @@
 #include <iostream>
 #include <unordered_map>
 #include <iomanip>
+#include <sstream>
 #include "sha1.h"
 
 #define HT 75000
