@@ -12,6 +12,8 @@ to run
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+#include <cstring>
+#include <cstdlib>
 #include "sha1.h"
 #include "rainbow.hpp"
 
@@ -34,7 +36,7 @@ int main(int argc, char*argv[]) {
     srandom(seed);
 
     ofstream outfile;
-    outfile.open(outfile_name);
+    outfile.open(outfile_name.c_str());
     outfile.setf(ios::hex,ios::basefield);    // format the output to be hex
     outfile.setf(ios::uppercase);
 

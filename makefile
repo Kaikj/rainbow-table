@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-Isha1
+CFLAGS=-Isha1 -Iinclude -std=c++11
 SHA1=sha1.o
 
 ODIR=obj

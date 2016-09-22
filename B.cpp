@@ -6,6 +6,7 @@ This program builds the rainbow table for the other program F.cpp.
 #include <unordered_map>
 #include <iomanip>
 #include <fstream>
+#include <cmath>
 #include "sha1.h"
 #include "rainbow.hpp"
 
