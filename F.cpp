@@ -8,6 +8,10 @@
 #include <iomanip>
 #include "sha1.h"
 
+#define HT 75000
+#define N_CHAIN 1048676
+#define MAX_LEN 224
+
 using namespace std;
 unsigned long TOTAL_SHA=0;       // Count the number of hashes performed.
 
