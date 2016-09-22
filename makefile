@@ -10,7 +10,7 @@ EXE=Generate B F
 
 all: $(EXE)
 
-$(EXE): %: $(ODIR)/%.o $(SHA1)
+$(EXE): %: $(ODIR)/%.o $(SHA1) $(OBJ)
 	$(CC) $< $(OBJ) -o $@
 
 $(SHA1):
