@@ -24,9 +24,6 @@ unsigned int  D[1048576][5];
 unordered_map <unsigned long, unsigned int> HashTable;
 unordered_map <unsigned long, unsigned int>::const_iterator G;
 
-//----  return the next word to be considered 
-void next_word(unsigned char m[3]) {
-    //   fill in the detail.
 }
 
 
