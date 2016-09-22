@@ -1,0 +1,4 @@
+make clean && echo 'make clean done'
+make && echo 'make done'
+./B && echo 'done ./B'
+nohup ./F < SAMPLE_INPUT.data > F.out 2> F.err &
