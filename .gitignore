@@ -1,5 +1,6 @@
 B
 F
 Generate
-rainbow
+rainbow_table
 *.o
+plaintxt.out
