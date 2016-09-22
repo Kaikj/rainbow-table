@@ -125,20 +125,6 @@ int buildT() {
         }
     }
 
-    //---    Write to the output file
-    //note that to reduce the size of the table, it is not neccessary to write the full digest.
-
-    // for (long i = 0; i < N_CHAIN; i++) {
-    //     fwrite(&(M[i][0]), sizeof( unsigned char), 1, stdout);
-    //     fwrite(&(M[i][1]), sizeof( unsigned char), 1, stdout);
-    //     fwrite(&(M[i][2]), sizeof( unsigned char), 1, stdout);
-
-    //     fwrite(&(D[i][0]), sizeof( unsigned int), 1, stdout);
-    //     fwrite(&(D[i][1]), sizeof( unsigned int), 1, stdout);
-    //     fwrite(&(D[i][2]), sizeof( unsigned int), 1, stdout);
-    //     fwrite(&(D[i][3]), sizeof( unsigned int), 1, stdout);
-    //     fwrite(&(D[i][4]), sizeof( unsigned int), 1, stdout);
-    // }
     outfile.close();
     return(0);
 }
