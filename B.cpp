@@ -4,6 +4,8 @@ This program builds the rainbow table for the other program F.cpp.
 
 #include <iostream>
 #include <unordered_map>
+#include <iomanip>
+#include <fstream>
 #include "sha1.h"
 
 using namespace std;
@@ -45,6 +47,10 @@ int buildT() {
     unsigned int  d[5];
     unsigned char m[3];
 
+    ofstream outfile;
+    outfile.open("rainbow_table");
+    outfile.setf(ios::hex,ios::basefield);    // format the output to be hex
+    outfile.setf(ios::uppercase);
 
     for (int i = 0; i < HT; i++) {
         next_word(m);
@@ -59,17 +65,17 @@ int buildT() {
     //---    Write to the output file
     //note that to reduce the size of the table, it is not neccessary to write the full digest.
 
-    for (long i = 0; i < N_CHAIN; i++) {
-        fwrite(&(M[i][0]), sizeof( unsigned char), 1, stdout);
-        fwrite(&(M[i][1]), sizeof( unsigned char), 1, stdout);
-        fwrite(&(M[i][2]), sizeof( unsigned char), 1, stdout);
+    // for (long i = 0; i < N_CHAIN; i++) {
+    //     fwrite(&(M[i][0]), sizeof( unsigned char), 1, stdout);
+    //     fwrite(&(M[i][1]), sizeof( unsigned char), 1, stdout);
+    //     fwrite(&(M[i][2]), sizeof( unsigned char), 1, stdout);
 
-        fwrite(&(D[i][0]), sizeof( unsigned int), 1, stdout);
-        fwrite(&(D[i][1]), sizeof( unsigned int), 1, stdout);
-        fwrite(&(D[i][2]), sizeof( unsigned int), 1, stdout);
-        fwrite(&(D[i][3]), sizeof( unsigned int), 1, stdout);
-        fwrite(&(D[i][4]), sizeof( unsigned int), 1, stdout);
-    }
+    //     fwrite(&(D[i][0]), sizeof( unsigned int), 1, stdout);
+    //     fwrite(&(D[i][1]), sizeof( unsigned int), 1, stdout);
+    //     fwrite(&(D[i][2]), sizeof( unsigned int), 1, stdout);
+    //     fwrite(&(D[i][3]), sizeof( unsigned int), 1, stdout);
+    //     fwrite(&(D[i][4]), sizeof( unsigned int), 1, stdout);
+    // }
     outfile.close();
     return(0);
 }
