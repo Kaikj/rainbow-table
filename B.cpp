@@ -56,6 +56,18 @@ int buildT() {
         next_word(m);
 
         // build the chain.
+        outfile << " " << setw(2) << setfill('0') << (unsigned int) M[i][0];
+        outfile << " " << setw(2) << setfill('0') << (unsigned int) M[i][1];
+        outfile << " " << setw(2) << setfill('0') << (unsigned int) M[i][2];
+
+        outfile << " " << setw(8) << setfill('0') << d[0];          // setw(8) set the width to be 8.
+        outfile << " " << setw(8) << setfill('0') << d[1];
+        outfile << " " << setw(8) << setfill('0') << d[2];
+        outfile << " " << setw(8) << setfill('0') << d[3];
+        outfile << " " << setw(8) << setfill('0') << d[4];
+
+        outfile << endl;
+
         // check whether to keep the chain.
         // You may want to drop the chain, for e.g. if the digest is already in the table.
         // This form the main component of your program.
