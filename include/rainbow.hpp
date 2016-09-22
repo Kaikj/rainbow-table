@@ -12,6 +12,10 @@
 
 namespace Rainbow {
 
+    static const unsigned int CHAIN_NUM = 75000;
+    static const unsigned int CHAIN_LEN = 224;
+    static const unsigned int MAX_SIZE = 1048576;
+
     //-----   H A S H      ------------------------------------//
     //   getrandom (m) :
     //      generate a random word. 

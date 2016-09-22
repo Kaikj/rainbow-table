@@ -9,10 +9,7 @@
 #include <fstream>
 #include <sstream>
 #include "sha1.h"
-
-#define HT 75000
-#define N_CHAIN 1048676
-#define MAX_LEN 224
+#include "rainbow.hpp"
 
 using namespace std;
 unsigned long TOTAL_SHA=0;       // Count the number of hashes performed.
@@ -147,11 +144,11 @@ int ReadT() {
 //------------------------------------------------------------------------------------
 int search(unsigned int target_d[5], unsigned char answer_m[3]) {
     unsigned int j, i;
-    unsigned char Colour_m[MAX_LEN][3];
-    unsigned int  Colour_d[MAX_LEN][5];
-    // unsigned int  flag    [MAX_LEN];
+    unsigned char Colour_m[Rainbow::CHAIN_LEN][3];
+    unsigned int  Colour_d[Rainbow::CHAIN_LEN][5];
+    // unsigned int  flag    [Rainbow::CHAIN_LEN];
 
-    for (j = 0; j < MAX_LEN; j++) {
+    for (j = 0; j < Rainbow::CHAIN_LEN; j++) {
         Colour_d[j][0] = target_d[0];
         Colour_d[j][1] = target_d[1];
         Colour_d[j][2] = target_d[2];
@@ -159,7 +156,7 @@ int search(unsigned int target_d[5], unsigned char answer_m[3]) {
         Colour_d[j][4] = target_d[4];
     }
 
-    for (j = 0; j < MAX_LEN; j++) {
+    for (j = 0; j < Rainbow::CHAIN_LEN; j++) {
         for (int k = 0; k < (j + 1); k++) {
             Reduce(Colour_d[k], Colour_m[k], j);
             Hash(Colour_m[k], Colour_d[k]);
@@ -180,7 +177,7 @@ int search(unsigned int target_d[5], unsigned char answer_m[3]) {
                 answer_m[1] = G->second.M[1];
                 answer_m[2] = G->second.M[2];
                 unsigned int d[5];
-                for (int n = 0; n < MAX_LEN; n++) {
+                for (int n = 0; n < Rainbow::CHAIN_LEN; n++) {
                     Hash(answer_m, d);
                     if (d[0] == target_d[0]
                         && d[1] == target_d[1]

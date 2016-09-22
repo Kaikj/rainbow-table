@@ -11,16 +11,13 @@ This program builds the rainbow table for the other program F.cpp.
 #include "sha1.h"
 #include "rainbow.hpp"
 
-#define HT 75000
-#define N_CHAIN 1048676
-
 using namespace std;
 
 //  A table to store all the words and digests.
 //    infeasible to have such large table in practice.
 //    for programming convenient, we store the whole table in memory.
-unsigned char M[1048576][3];
-unsigned int  D[1048576][5];
+unsigned char M[Rainbow::MAX_SIZE][3];
+unsigned int  D[Rainbow::MAX_SIZE][5];
 
 struct Digest {
     unsigned int D[5];
@@ -73,15 +70,13 @@ int buildT() {
     outfile.setf(ios::hex,ios::basefield);    // format the output to be hex
     outfile.setf(ios::uppercase);
 
-    int chain_len = pow(2, 24)/HT;
-
-    for (int i = 0; i < HT; i++) {
+    for (int i = 0; i < Rainbow::CHAIN_NUM; i++) {
         Rainbow::next_word(M[i]);
 
         // build the chain.
         Rainbow::hash(M[i], d);
 
-        for (int j = 0; j < chain_len - 1; j++) {
+        for (int j = 0; j < Rainbow::CHAIN_LEN - 1; j++) {
             Rainbow::reduce(d, m, j);
             Rainbow::hash(m, d);
         }
