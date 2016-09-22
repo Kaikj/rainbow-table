@@ -83,31 +83,47 @@ int buildT() {
 
         for (int j = 0; j < chain_len - 1; j++) {
             Rainbow::reduce(d, m, i);
-
-            if (j < (chain_len - 2)) {
-                Rainbow::hash(m, d);
-            }
+            Rainbow::hash(m, d);
         }
 
-        Rainbow::hash(m, D[i]);
-
-        outfile << " " << setw(2) << setfill('0') << (unsigned int) M[i][0];
-        outfile << " " << setw(2) << setfill('0') << (unsigned int) M[i][1];
-        outfile << " " << setw(2) << setfill('0') << (unsigned int) M[i][2];
-
-        outfile << " " << setw(8) << setfill('0') << d[0];          // setw(8) set the width to be 8.
-        outfile << " " << setw(8) << setfill('0') << d[1];
-        outfile << " " << setw(8) << setfill('0') << d[2];
-        outfile << " " << setw(8) << setfill('0') << d[3];
-        outfile << " " << setw(8) << setfill('0') << d[4];
-
-        outfile << endl;
+        struct Digest di = {
+            d[0],
+            d[1],
+            d[2],
+            d[3],
+            d[4],
+        };
+        G = HashTable.find(di);
 
         // check whether to keep the chain.
         // You may want to drop the chain, for e.g. if the digest is already in the table.
         // This form the main component of your program.
-    }
 
+        // The digest already exists. Throw the chain away
+        if (G != HashTable.end()) {
+            i--;
+        } else {
+            struct Text t = {
+                M[i][0],
+                M[i][1],
+                M[i][2]
+            };
+            std::pair<Digest, Text> p (di, t);
+            HashTable.insert(p);
+
+            outfile << " " << setw(2) << setfill('0') << (unsigned int) M[i][0];
+            outfile << " " << setw(2) << setfill('0') << (unsigned int) M[i][1];
+            outfile << " " << setw(2) << setfill('0') << (unsigned int) M[i][2];
+
+            outfile << " " << setw(8) << setfill('0') << d[0];          // setw(8) set the width to be 8.
+            outfile << " " << setw(8) << setfill('0') << d[1];
+            outfile << " " << setw(8) << setfill('0') << d[2];
+            outfile << " " << setw(8) << setfill('0') << d[3];
+            outfile << " " << setw(8) << setfill('0') << d[4];
+
+            outfile << endl;
+        }
+    }
 
     //---    Write to the output file
     //note that to reduce the size of the table, it is not neccessary to write the full digest.
