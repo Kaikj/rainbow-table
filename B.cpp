@@ -6,6 +6,7 @@ This program builds the rainbow table for the other program F.cpp.
 #include <unordered_map>
 #include <iomanip>
 #include <fstream>
+#include <sstream>
 #include <cmath>
 #include "sha1.h"
 #include "rainbow.hpp"
@@ -21,13 +22,47 @@ using namespace std;
 unsigned char M[1048576][3];
 unsigned int  D[1048576][5];
 
-unordered_map <unsigned long, unsigned int> HashTable;
-unordered_map <unsigned long, unsigned int>::const_iterator G;
+struct Digest {
+    unsigned int D[5];
 
+    bool operator==(const Digest &other) const {
+        return (D[0] == other.D[0]
+            && D[1] == other.D[1]
+            && D[2] == other.D[2]
+            && D[3] == other.D[3]
+            && D[4] == other.D[4]);
+    }
+};
+
+namespace std {
+    template <>
+    struct hash<Digest> {
+        std::size_t operator()(const Digest &k) const {
+            std::stringstream ss;
+            ss << k.D[0];
+            ss << k.D[1];
+            ss << k.D[2];
+            ss << k.D[3];
+            ss << k.D[4];
+
+            return std::hash<string>() (ss.str());
+    }
+  };
 }
 
+struct Text {
+    unsigned char M[3];
 
+    bool operator==(const Text &other) const {
+        return (M[0] == other.M[0]
+            && M[1] == other.M[1]
+            && M[2] == other.M[2]);
+    }
+};
 
+//-------   Data Structure for searching    -----------//
+unordered_map <Digest, Text> HashTable;
+unordered_map <Digest, Text>::const_iterator G;
 
 int buildT() {
     unsigned int  d[5];
