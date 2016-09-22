@@ -179,17 +179,18 @@ int search(unsigned int target_d[5], unsigned char answer_m[3]) {
                 answer_m[0] = G->second.M[0];
                 answer_m[1] = G->second.M[1];
                 answer_m[2] = G->second.M[2];
+                unsigned int d[5];
                 for (int n = 0; n < MAX_LEN; n++) {
-                    Hash(Colour_m[0], Colour_d[0]);
-                    if (Colour_d[0][0] == target_d[0]
-                        && Colour_d[0][1] == target_d[1]
-                        && Colour_d[0][2] == target_d[2]
-                        && Colour_d[0][3] == target_d[3]
-                        && Colour_d[0][4] == target_d[4]) {
+                    Hash(answer_m, d);
+                    if (d[0] == target_d[0]
+                        && d[1] == target_d[1]
+                        && d[2] == target_d[2]
+                        && d[3] == target_d[3]
+                        && d[4] == target_d[4]) {
                         cout << "Found!" << endl;
                         return true;
                     }
-                    Reduce(Colour_d[0], answer_m, n);
+                    Reduce(d, answer_m, n);
                 }
             }
         }
