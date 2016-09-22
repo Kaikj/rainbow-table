@@ -6,7 +6,7 @@ ODIR=obj
 _OBJ=$(SHA1)
 OBJ=$(patsubst %,$(ODIR)/%,$(_OBJ))
 
-EXE= Generate B F
+EXE=Generate B F
 
 all: $(EXE)
 
