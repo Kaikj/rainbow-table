@@ -52,6 +52,8 @@ int buildT() {
     outfile.setf(ios::hex,ios::basefield);    // format the output to be hex
     outfile.setf(ios::uppercase);
 
+    int chain_len = pow(2, 24)/HT;
+
     for (int i = 0; i < HT; i++) {
         next_word(m);
 
