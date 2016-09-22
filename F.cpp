@@ -165,6 +165,14 @@ int search(unsigned int target_d[5], unsigned char answer_m[3]) {
             Hash(Colour_m[k], Colour_d[k]);
 
             //-------- search for the digest Colour_d[k] in the data structure. 
+            struct Digest d = {
+                    Colour_d[k][0],
+                    Colour_d[k][1],
+                    Colour_d[k][2],
+                    Colour_d[k][3],
+                    Colour_d[k][4],
+                };
+            G = HashTable.find(d);
 
             //-------- if found, call transverse the chain starting from the head to find the pre-image.
         }
