@@ -82,7 +82,7 @@ int buildT() {
         Rainbow::hash(M[i], d);
 
         for (int j = 0; j < chain_len - 1; j++) {
-            Rainbow::reduce(d, m, i);
+            Rainbow::reduce(d, m, j);
             Rainbow::hash(m, d);
         }
 
