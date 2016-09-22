@@ -56,6 +56,18 @@ int buildT() {
         next_word(m);
 
         // build the chain.
+        ::hash(M[i], d);
+
+        for (int j = 0; j < chain_len - 1; j++) {
+            ::reduce(d, m, i);
+
+            if (j < (chain_len - 2)) {
+                ::hash(m, d);
+            }
+        }
+
+        ::hash(m, D[i]);
+
         outfile << " " << setw(2) << setfill('0') << (unsigned int) M[i][0];
         outfile << " " << setw(2) << setfill('0') << (unsigned int) M[i][1];
         outfile << " " << setw(2) << setfill('0') << (unsigned int) M[i][2];
