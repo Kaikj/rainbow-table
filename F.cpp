@@ -159,7 +159,7 @@ int search(unsigned int target_d[5], unsigned char answer_m[3]) {
         Colour_d[j][4] = target_d[4];
     }
 
-    for (j = 0; j < L_CHAIN; j++) {
+    for (j = 0; j < MAX_LEN; j++) {
         for (int k = 0; k < (j + 1); k++) {
             Reduce(Colour_d[k], Colour_m[k], j);
             Hash(Colour_m[k], Colour_d[k]);
