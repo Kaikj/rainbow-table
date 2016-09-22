@@ -176,9 +176,9 @@ int search(unsigned int target_d[5], unsigned char answer_m[3]) {
 
             //-------- if found, call transverse the chain starting from the head to find the pre-image.
             if (G != HashTable.end()) {
-                Colour_m[0][0] = G->second.M[0];
-                Colour_m[0][1] = G->second.M[1];
-                Colour_m[0][2] = G->second.M[2];
+                answer_m[0] = G->second.M[0];
+                answer_m[1] = G->second.M[1];
+                answer_m[2] = G->second.M[2];
                 for (int n = 0; n < MAX_LEN; n++) {
                     Hash(Colour_m[0], Colour_d[0]);
                     if (Colour_d[0][0] == target_d[0]
