@@ -44,7 +44,8 @@ int main(int argc, char*argv[]) {
     cout.setf(ios::uppercase);
 
     for (int i = 0; i < number; i++) {
-        getrandom(m); Hash(m,d);
+        Rainbow::get_random(m);
+        Rainbow::hash(m,d);
 
         // When generating random number, store the plain text
         outfile << setw(1) << (unsigned int)m[0]/16;
