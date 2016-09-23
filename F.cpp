@@ -65,52 +65,54 @@ unordered_map <Digest, Text>::const_iterator G;
 //   Store the result in M and D                    //
 int ReadT() {
     ifstream infile;
-    infile.open("rainbow_table");
-    infile.setf(ios::hex,ios::basefield);    // format the output to be hex
-    infile.setf(ios::uppercase);
-
     int i = 0;
-    unsigned int input;
 
-    while (true) {
+    for (int j = 0; j < Rainbow::TABLE_NUM; j++) {
+        infile.open("rainbow_table" + to_string(j));
+        infile.setf(ios::hex,ios::basefield);    // format the output to be hex
+        infile.setf(ios::uppercase);
 
-        infile >> hex >> input;
+        unsigned int input;
 
-        // Check the first input
-        if (infile.eof()) {
-            break;
+        while (true) {
+            infile >> hex >> input;
+
+            // Check the first input
+            if (infile.eof()) {
+                break;
+            }
+
+            M[i][0] = (unsigned char) input;
+            infile >> hex >> input;
+            M[i][1] = (unsigned char) input;
+            infile >> hex >> input;
+            M[i][2] = (unsigned char) input;
+            struct Text t = {
+                M[i][0],
+                M[i][1],
+                M[i][2]
+            };
+
+            infile >> hex >> D[i][0];
+            infile >> hex >> D[i][1];
+            infile >> hex >> D[i][2];
+            infile >> hex >> D[i][3];
+            infile >> hex >> D[i][4];
+            struct Digest d = {
+                D[i][0],
+                D[i][1],
+                D[i][2],
+                D[i][3],
+                D[i][4],
+            };
+
+            std::pair<Digest, Text> p (d, t);
+            HashTable.insert(p);
+            i++;
         }
 
-        M[i][0] = (unsigned char) input;
-        infile >> hex >> input;
-        M[i][1] = (unsigned char) input;
-        infile >> hex >> input;
-        M[i][2] = (unsigned char) input;
-        struct Text t = {
-            M[i][0],
-            M[i][1],
-            M[i][2]
-        };
-
-        infile >> hex >> D[i][0];
-        infile >> hex >> D[i][1];
-        infile >> hex >> D[i][2];
-        infile >> hex >> D[i][3];
-        infile >> hex >> D[i][4];
-        struct Digest d = {
-            D[i][0],
-            D[i][1],
-            D[i][2],
-            D[i][3],
-            D[i][4],
-        };
-
-        std::pair<Digest, Text> p (d, t);
-        HashTable.insert(p);
-        i++;
+        infile.close();
     }
-
-    infile.close();
     return(0);
 }
 

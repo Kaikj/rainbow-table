@@ -15,6 +15,7 @@ namespace Rainbow {
     static const unsigned int CHAIN_NUM = 75000;
     static const unsigned int CHAIN_LEN = 224;
     static const unsigned int MAX_SIZE = 1048576;
+    static const unsigned int TABLE_NUM = 1;
 
     static unsigned long TOTAL_SHA = 0;
 

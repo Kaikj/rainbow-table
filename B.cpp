@@ -61,12 +61,12 @@ struct Text {
 unordered_map <Digest, Text> HashTable;
 unordered_map <Digest, Text>::const_iterator G;
 
-int buildT() {
+int buildT(string filename) {
     unsigned int  d[5];
     unsigned char m[3];
 
     ofstream outfile;
-    outfile.open("rainbow_table");
+    outfile.open(filename.c_str());
     outfile.setf(ios::hex,ios::basefield);    // format the output to be hex
     outfile.setf(ios::uppercase);
 
@@ -133,6 +133,8 @@ int main(int argc, char*argv[]) {
     //----  Setting the parameters
 
     //----   Build the table.
-    buildT();
+    for (int j = 0; j < Rainbow::TABLE_NUM; j++) {
+        buildT("rainbow_table" + to_string(j));
+    }
 }
 
