@@ -220,6 +220,6 @@ int main(int argc, char*argv[]) {
 
     cout.setf(ios::dec);
     cout << "Accuracy       C is: " << total_found/5000.0 << endl;
-    cout << "Speedup factor F is: " << (5000.0/TOTAL_SHA)*8388608 << endl;
+    cout << "Speedup factor F is: " << (5000.0/Rainbow::get_total_sha())*8388608 << endl;
 }
 
