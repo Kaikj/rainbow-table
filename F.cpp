@@ -160,7 +160,6 @@ int search(unsigned int target_d[5], unsigned char answer_m[3]) {
                         && d[2] == target_d[2]
                         && d[3] == target_d[3]
                         && d[4] == target_d[4]) {
-                        cout << "Found!" << endl;
                         return true;
                     }
                     Rainbow::reduce(d, answer_m, n);
