@@ -70,6 +70,8 @@ int buildT() {
     outfile.setf(ios::hex,ios::basefield);    // format the output to be hex
     outfile.setf(ios::uppercase);
 
+    HashTable.clear();
+
     for (int i = 0; i < Rainbow::CHAIN_NUM; i++) {
         Rainbow::next_word(M[i]);
 
